@@ -10,6 +10,7 @@ public class UIMenu {
     private Utility utility = new Utility();
     private Integer option = 0;
     private ArrayList<User> users = new ArrayList<>();
+    private final String EXTERNAL_FILE = "./resources/bicycles.txt";
 
     public void mainMenu(){
 
