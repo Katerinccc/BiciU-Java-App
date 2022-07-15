@@ -17,16 +17,16 @@ public class UIUser {
         return new User(userId, userName, userAge, userType);
     }
 
-    private UserType captureUserType(){
+    public UserType captureUserType(){
 
         String userType;
 
         do {
-            utility.displayData("Select the type of user to Register. " +
+            utility.displayData("Indicate type of user. " +
                     "Enter S for Student or P for Professor:");
             userType = (String) utility.getDataUser(DataUserType.TEXT);
-            validateUserType(userType);
-        }while (!validateUserType(userType));
+            validateUserChoice(userType);
+        }while (!validateUserChoice(userType));
 
         return assignUserType(userType);
     }
@@ -38,11 +38,11 @@ public class UIUser {
         return UserType.PROFESSOR;
     }
 
-    private boolean validateUserType(String userData){
+    private boolean validateUserChoice(String userData){
         return (userData.equalsIgnoreCase("S") || userData.equalsIgnoreCase("P"));
     }
 
-    private String getUserId(UserType userType){
+    public String getUserId(UserType userType){
         utility.displayData("Enter user ID:");
         String userId = (String) utility.getDataUser(DataUserType.TEXT);
 

@@ -14,7 +14,7 @@ public class UIBicycle {
     private Utility utility = new Utility();
 
 
-    private ArrayList<Bicycle> createBicycles(String externalFile){
+    public ArrayList<Bicycle> createBicycles(String externalFile){
 
         File file;
         FileReader fileReader;

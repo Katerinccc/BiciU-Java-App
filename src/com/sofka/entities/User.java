@@ -23,4 +23,11 @@ public class User {
         return fullName;
     }
 
+    public Debt getDebt() {
+        return debt;
+    }
+
+    public void setDebt(Debt debt) {
+        this.debt = debt;
+    }
 }
