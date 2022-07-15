@@ -1,6 +1,7 @@
 package com.sofka.util;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -24,6 +25,11 @@ import java.util.Scanner;
  * @since 1.00.000
  */
 public class Utility {
+
+    /**
+     * New instance of scanner class allows to capture data.
+     */
+    private Scanner getUserData = new Scanner(System.in);
 
     /**
      * Display a message to the user.
@@ -58,6 +64,7 @@ public class Utility {
             case INTEGER -> getIntegerDataUser();
             case BOOLEAN -> getBooleanUser();
             case DATE -> getDateDataUser();
+            case TIME -> getTimeDataUser();
         };
     }
 
@@ -66,8 +73,7 @@ public class Utility {
      * @return the information type String capture.
      */
     private String getTextDataUser(){
-        Scanner captureUserData = new Scanner(System.in);
-        return captureUserData.nextLine();
+        return getUserData.nextLine();
     }
 
     /**
@@ -75,7 +81,6 @@ public class Utility {
      * @return the information type int capture and validate if the data is a number and if is positive.
      */
     private int getIntegerDataUser(){
-        Scanner getUserData = new Scanner(System.in);
 
         int number;
 
@@ -98,7 +103,6 @@ public class Utility {
      * @return the information type double capture and validate if the data is a decimal number and if is positive.
      */
     private double getDoubleDataUser(){
-        Scanner getUserData = new Scanner(System.in);
 
         double number;
         do {
@@ -118,7 +122,6 @@ public class Utility {
      * if the data is a decimal number and if is positive.
      */
     private Boolean getBooleanUser(){
-        Scanner getUserData = new Scanner(System.in);
 
         int booleanOption;
         do {
@@ -150,7 +153,6 @@ public class Utility {
      * @return the date enter for the user.
      */
     private LocalDate getDateDataUser(){
-        Scanner getUserData = new Scanner(System.in);
 
         LocalDate date = null;
         String dateText;
@@ -166,6 +168,28 @@ public class Utility {
         }while (date == null);
 
         return date;
+    }
+
+    /**
+     * Allows capturing data from the user of type time format (HH:MM).
+     * @return the time enter for the user.
+     */
+    private LocalTime getTimeDataUser(){
+
+        LocalTime time = null;
+        String hourText;
+
+        do{
+            try {
+                hourText = getUserData.nextLine();
+                time = LocalTime.parse(hourText);
+            }
+            catch (DateTimeParseException exception){
+                displayError("Invalid hour entered. The valid format is: HH:MM Please try again:");
+            }
+        }while (time == null);
+
+        return time;
     }
 
     /**

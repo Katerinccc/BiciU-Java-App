@@ -9,6 +9,7 @@ public enum DataUserType {
     INTEGER,
     DOUBLE,
     BOOLEAN,
-    DATE
+    DATE,
+    TIME
 
 }
