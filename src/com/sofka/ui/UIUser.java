@@ -23,7 +23,7 @@ public class UIUser {
 
         do {
             utility.displayData("Select the type of user to Register. " +
-                    "Enter S for Student or P for Professor");
+                    "Enter S for Student or P for Professor:");
             userType = (String) utility.getDataUser(DataUserType.TEXT);
             validateUserType(userType);
         }while (!validateUserType(userType));
@@ -43,7 +43,7 @@ public class UIUser {
     }
 
     private String getUserId(UserType userType){
-        utility.displayData("Enter user ID");
+        utility.displayData("Enter user ID:");
         String userId = (String) utility.getDataUser(DataUserType.TEXT);
 
         if (userType.equals(UserType.STUDENT)){
@@ -53,13 +53,18 @@ public class UIUser {
     }
 
     private String getUserName(){
-        utility.displayData("Enter user name");
+        utility.displayData("Enter user full name:");
         return (String) utility.getDataUser(DataUserType.TEXT);
     }
 
     private int getUserAge(){
-        utility.displayData("Enter user age");
-        return (int) utility.getDataUser(DataUserType.INTEGER);
+        int userAge;
+
+        do {
+            utility.displayData("Enter user age (needs to be 18 years or more to register):");
+            userAge = (int) utility.getDataUser(DataUserType.INTEGER);
+        }while (userAge < 18);
+        return userAge;
     }
 
 }

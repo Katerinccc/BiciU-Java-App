@@ -1,11 +1,15 @@
 package com.sofka.ui;
 
+import com.sofka.entities.User;
 import com.sofka.util.Utility;
+
+import java.util.ArrayList;
 
 public class UIMenu {
 
     private Utility utility = new Utility();
     private Integer option = 0;
+    private ArrayList<User> users = new ArrayList<>();
 
     public void mainMenu(){
 
@@ -28,7 +32,11 @@ public class UIMenu {
         utility.displayData("-------------------------------------------------------------------------------");
 
         switch (option) {
-            case 1 -> utility.displayData("Option not available yet");
+            case 1 -> {
+                UIUser uiUser = new UIUser();
+                users.add(uiUser.createUser());
+                utility.displayData("User register successfully.");
+            }
             case 2 -> utility.displayData("Option not available yet");
             case 3 -> utility.displayData("Option not available yet");
             case 4 -> utility.displayData("Option not available yet");

@@ -6,6 +6,7 @@ public class User {
     private String fullName;
     private int age;
     private UserType userType;
+    private Debt debt;
 
     public User(String id, String fullName, int age, UserType userType) {
         this.id = id;
