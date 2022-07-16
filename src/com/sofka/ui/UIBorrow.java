@@ -1,10 +1,12 @@
-package com.sofka.util;
+package com.sofka.ui;
 
 import com.sofka.entities.Bicycle;
 import com.sofka.entities.BicycleType;
 import com.sofka.entities.User;
 import com.sofka.entities.UserType;
-import com.sofka.ui.UIUser;
+import com.sofka.util.DataUserType;
+import com.sofka.util.Utility;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -114,7 +116,9 @@ public class UIBorrow {
     }
 
     private void borrowBicycleSelected(Bicycle bicycleSelected){
-        Bicycle bicycle = bicycles.stream()
+        Bicycle bicycle = bicycles.stream(
+
+                )
                 .filter(bicy -> bicy.getCode().equals(bicycleSelected.getCode())).findFirst().get();
 
         bicycle.borrowBicycle();

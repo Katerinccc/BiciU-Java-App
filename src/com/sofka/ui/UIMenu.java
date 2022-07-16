@@ -1,9 +1,8 @@
 package com.sofka.ui;
 
+import com.sofka.Bicycle.GenerateBicycle;
 import com.sofka.entities.Bicycle;
 import com.sofka.entities.User;
-import com.sofka.util.UIBicycle;
-import com.sofka.util.UIBorrow;
 import com.sofka.util.Utility;
 import java.util.ArrayList;
 
@@ -11,14 +10,14 @@ public class UIMenu {
 
     private Utility utility = new Utility();
     private Integer option = 0;
-    private UIBicycle uiBicycle = new UIBicycle();
+    private GenerateBicycle generateBicycle = new GenerateBicycle();
     private ArrayList<User> usersSystem = new ArrayList<>();
     private ArrayList<Bicycle> bicycleSystem = new ArrayList<>();
     private final String EXTERNAL_FILE = "./resources/bicycles.txt";
 
     public void mainMenu(){
 
-        bicycleSystem = uiBicycle.createBicycles(EXTERNAL_FILE);
+        bicycleSystem = generateBicycle.createBicycles(EXTERNAL_FILE);
 
         do {
             utility.displayData("Welcome to BiciU system, Select and option:");

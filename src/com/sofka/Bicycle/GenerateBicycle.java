@@ -1,30 +1,28 @@
-package com.sofka.util;
+package com.sofka.Bicycle;
 
 import com.sofka.entities.Bicycle;
 import com.sofka.entities.BicycleType;
+import com.sofka.util.Utility;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UIBicycle {
+public class GenerateBicycle {
 
     private Utility utility = new Utility();
 
 
     public ArrayList<Bicycle> createBicycles(String externalFile){
 
-        File file;
         FileReader fileReader;
         BufferedReader bufferedReader;
         ArrayList<Bicycle> bicycles = new ArrayList<>();
 
         try {
 
-            file = new File(externalFile);
-            fileReader = new FileReader(file);
+            fileReader = new FileReader(externalFile);
             bufferedReader = new BufferedReader(fileReader);
 
             String line;
