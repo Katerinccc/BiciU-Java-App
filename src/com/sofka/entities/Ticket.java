@@ -25,6 +25,7 @@ public class Ticket {
                   User user,
                   LocalDate date,
                   LocalTime startTime,
+                  LocalTime endTime,
                   boolean haveHelmet,
                   boolean inGoodCondition,
                   TicketStatus ticketStatus,
@@ -35,6 +36,7 @@ public class Ticket {
         this.user = user;
         this.date = date;
         this.startTime = startTime;
+        this.endTime = endTime;
         this.haveHelmet = haveHelmet;
         this.inGoodCondition = inGoodCondition;
         this.ticketStatus = ticketStatus;

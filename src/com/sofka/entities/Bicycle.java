@@ -18,6 +18,10 @@ public class Bicycle implements Borrow {
         this.isAvailable = isAvailable;
     }
 
+    public Bicycle(String code) {
+        this.code = code;
+    }
+
     @Override
     public void borrowBicycle() {
         this.isAvailable = false;

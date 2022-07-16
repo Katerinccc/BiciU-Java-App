@@ -18,6 +18,7 @@ public class GenerateTicket {
                             user,
                             LocalDate.now(),
                             LocalTime.now(),
+                            null,
                             true,
                             true,
                             TicketStatus.ACTIVE,
