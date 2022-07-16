@@ -13,6 +13,7 @@ public class User {
         this.fullName = fullName;
         this.age = age;
         this.userType = userType;
+        this.debt = new Debt(DebtType.NO_DEBT);
     }
 
     public String getId() {

@@ -2,8 +2,10 @@ package com.sofka.ui;
 
 import com.sofka.entities.Bicycle;
 import com.sofka.entities.BicycleType;
+import com.sofka.entities.Ticket;
 import com.sofka.entities.User;
 import com.sofka.entities.UserType;
+import com.sofka.ticket.GenerateTicket;
 import com.sofka.util.DataUserType;
 import com.sofka.util.Utility;
 
@@ -22,36 +24,20 @@ public class UIBorrow {
         users = usersSystem;
         bicycles = bicyclesSystem;
 
-        if (!validateUserEnable()){
-            return bicycles;
+        User currentUser = getUser();
+
+        if (validateUser(currentUser)){
+            tryBorrowBicycleSelected(currentUser);
         }
 
-        BicycleType bicycleTypeChoice = selectBicycleType();
-
-        if (selectBicycle(bicycleTypeChoice) == null){
-            return bicycles;
-        }
-
-        Bicycle bicycleUser = selectBicycle(bicycleTypeChoice);
-        borrowBicycleSelected(bicycleUser);
         return bicycles;
     }
 
-    private boolean validateUserEnable(){
-        User currentUser = validateUserExists();
-
-        if (currentUser == null){
-            return false;
-        }
-
-        if (validateUserHasDebt(currentUser)){
-            return false;
-        }
-
-        return true;
+    private boolean validateUser(User currentUser){
+        return currentUser != null && !validateUserHasDebt(currentUser);
     }
 
-    private User validateUserExists(){
+    private User getUser(){
         UserType userType = uiUser.captureUserType();
         String userId = uiUser.getUserId(userType);
 
@@ -66,13 +52,7 @@ public class UIBorrow {
     }
 
     private boolean validateUserHasDebt(User user){
-
-        if (user.getDebt() == null){
-            return false;
-        }
-
         return user.getDebt().getAmount() != 0;
-
     }
 
     private BicycleType selectBicycleType(){
@@ -88,7 +68,6 @@ public class UIBorrow {
         return assignBicycleType(userChoice);
 
     }
-
 
     private BicycleType assignBicycleType(String userType){
         if (userType.equalsIgnoreCase("M")){
@@ -115,18 +94,24 @@ public class UIBorrow {
         return optionalBicycle.get();
     }
 
-    private void borrowBicycleSelected(Bicycle bicycleSelected){
-        Bicycle bicycle = bicycles.stream(
+    private void tryBorrowBicycleSelected(User currentUser){
 
-                )
-                .filter(bicy -> bicy.getCode().equals(bicycleSelected.getCode())).findFirst().get();
+        BicycleType bicycleTypeChoice = selectBicycleType();
 
-        bicycle.borrowBicycle();
+        if (selectBicycle(bicycleTypeChoice) != null){
 
-        utility.displayData("Bicycle chosen successfully!");
-        bicycleSelected.displayBicycle();
+            Bicycle bicycleSelected = selectBicycle(bicycleTypeChoice);
 
+            assert bicycleSelected != null;
+            bicycleSelected.borrowBicycle();
+
+            utility.displayData("Bicycle chosen successfully!");
+            bicycleSelected.displayBicycle();
+
+            GenerateTicket generateTicket = new GenerateTicket();
+            Ticket ticketGenerated = generateTicket.generateNewTicket(bicycleSelected, currentUser);
+            ticketGenerated.displayTicket();
+
+        }
     }
-
-
 }

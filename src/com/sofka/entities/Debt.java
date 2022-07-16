@@ -11,10 +11,11 @@ public class Debt {
     }
 
     private int assignAmount(DebtType debtType){
-        if (debtType.equals(DebtType.NO_TIME)){
-            return 3;
-        }
-        return 5;
+        return switch (debtType) {
+            case NO_TIME -> 3;
+            case NO_DEBT -> 0;
+            case WITHOUT_HELMET, DAMAGED -> 5;
+        };
     }
 
     public int getAmount() {
