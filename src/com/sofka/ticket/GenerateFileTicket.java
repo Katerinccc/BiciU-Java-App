@@ -13,9 +13,16 @@ public class GenerateFileTicket {
     private ArrayList<Ticket> ticketsFile = new ArrayList<>();
 
     public void updateTicketsFile(Ticket newTicket){
+        ticketsFile = readCurrentTicketsFile();
         ticketsFile.add(newTicket);
         writeTicketsFile(EXTERNAL_FILE);
     }
+
+    private ArrayList<Ticket> readCurrentTicketsFile(){
+        ReadFileTicket readFileTicket = new ReadFileTicket();
+        return readFileTicket.readFileTickets();
+    }
+
     private void writeTicketsFile(String externalFile){
         try
         {
@@ -28,6 +35,7 @@ public class GenerateFileTicket {
             }
 
             bufferedWriter.close();
+            fileWriter.close();
         }
         catch(Exception exception)
         {

@@ -4,6 +4,8 @@ import com.sofka.Bicycle.GenerateBicycle;
 import com.sofka.entities.Bicycle;
 import com.sofka.entities.User;
 import com.sofka.util.Utility;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class UIMenu {
@@ -30,6 +32,9 @@ public class UIMenu {
             option = (Integer) utility.getDataUser(com.sofka.util.DataUserType.INTEGER);
             options(option);
         }while (option != 0);
+
+        File ticketsFile = new File("./resources/tickets.txt");
+        ticketsFile.delete();
 
     }
 

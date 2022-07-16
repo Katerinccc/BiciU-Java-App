@@ -6,6 +6,7 @@ import com.sofka.entities.TicketStatus;
 import com.sofka.entities.User;
 import com.sofka.util.Utility;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,7 +18,6 @@ public class ReadFileTicket {
 
     private final String EXTERNAL_FILE = "./resources/tickets.txt";
     private Utility utility = new Utility();
-    private ArrayList<Ticket> tickets = new ArrayList<>();
 
     public ArrayList<Ticket> readFileTickets(){
 
@@ -27,20 +27,25 @@ public class ReadFileTicket {
 
         try {
 
-            fileReader = new FileReader(EXTERNAL_FILE);
-            bufferedReader = new BufferedReader(fileReader);
+            File file = new File(EXTERNAL_FILE);
 
-            String line;
+            if (file.length() != 0L){
+                fileReader = new FileReader(file);
 
-            while ((line = bufferedReader.readLine()) != null){
-                addNewTicket(tickets, line);
+                bufferedReader = new BufferedReader(fileReader);
+
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null){
+                    addNewTicket(ticketsFile, line);
+                }
+
+                bufferedReader.close();
+                fileReader.close();
             }
 
-            bufferedReader.close();
-            fileReader.close();
-
         }catch (Exception exception){
-            utility.displayData("File upload failed. " +  exception.getMessage());
+            utility.displayData("Read file failed. " +  exception.getMessage());
         }
 
         return ticketsFile;
@@ -54,7 +59,7 @@ public class ReadFileTicket {
                 createUser(newTicket.get(2), newTicket.get(3)),
                 LocalDate.parse(newTicket.get(4)),
                 LocalTime.parse(newTicket.get(5)),
-                LocalTime.parse(newTicket.get(6)),
+                validateTime(newTicket.get(6)),
                 Boolean.parseBoolean(newTicket.get(7)),
                 Boolean.parseBoolean(newTicket.get(8)),
                 createTicketStatus(newTicket.get(9)),
@@ -76,6 +81,13 @@ public class ReadFileTicket {
             case "OK" -> TicketStatus.OK;
             default -> null;
         };
+    }
+
+    private LocalTime validateTime(String time){
+        if (time.equals("null")){
+            return null;
+        }
+        return LocalTime.parse(time);
     }
 
 }

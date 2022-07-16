@@ -1,1 +1,0 @@
-T-001;BIC-02;S-123;Kate;2022-07-16;00:17:17.680734;null;true;true;ACTIVE;0

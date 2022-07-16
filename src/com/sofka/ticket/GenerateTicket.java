@@ -10,9 +10,13 @@ import java.util.ArrayList;
 
 public class GenerateTicket {
 
-    private ArrayList<Ticket> ticketsFile = new ArrayList<>();
+    private ReadFileTicket readFileTicket = new ReadFileTicket();
+
     public Ticket generateNewTicket(Bicycle bicycle, User user){
-        String code = generateConsecutiveCode();
+
+        ArrayList<Ticket> ticketsFile = readFileTicket.readFileTickets();
+
+        String code = generateConsecutiveCode(ticketsFile);
         Ticket newTicket = new Ticket(code,
                             bicycle,
                             user,
@@ -30,7 +34,7 @@ public class GenerateTicket {
         return newTicket;
     }
 
-    private String generateConsecutiveCode(){
+    private String generateConsecutiveCode(ArrayList<Ticket> ticketsFile){
 
         if (!ticketsFile.isEmpty()){
             int lastIndex = ticketsFile.size() - 1;
