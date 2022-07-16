@@ -10,29 +10,36 @@ import java.util.ArrayList;
 
 public class GenerateTicket {
 
-    private ArrayList<Ticket> tickets = new ArrayList<>();
-
+    private ArrayList<Ticket> ticketsFile = new ArrayList<>();
     public Ticket generateNewTicket(Bicycle bicycle, User user){
         String code = generateConsecutiveCode();
-        return new Ticket(code,
-                bicycle,
-                user,
-                LocalDate.now(),
-                LocalTime.now(),
-                true,
-                true,
-                TicketStatus.ACTIVE,
-                0);
+        Ticket newTicket = new Ticket(code,
+                            bicycle,
+                            user,
+                            LocalDate.now(),
+                            LocalTime.now(),
+                            true,
+                            true,
+                            TicketStatus.ACTIVE,
+                            0);
+
+        GenerateFileTicket generateFileTicket = new GenerateFileTicket();
+        generateFileTicket.updateTicketsFile(newTicket);
+
+        return newTicket;
     }
 
     private String generateConsecutiveCode(){
 
-        int lastIndex = tickets.size() - 1;
-        String lastCode = tickets.get(lastIndex).getCode();
-        int codeNumber = Integer.parseInt(lastCode.replaceAll("[^0-9]", ""));
+        if (!ticketsFile.isEmpty()){
+            int lastIndex = ticketsFile.size() - 1;
+            String lastCode = ticketsFile.get(lastIndex).getCode();
+            int codeNumber = Integer.parseInt(lastCode.replaceAll("[^0-9]", ""));
 
-        return "T-"+ padLeftZeros(String.valueOf(codeNumber+1), 3);
+            return "T-"+ padLeftZeros(String.valueOf(codeNumber+1), 3);
+        }
 
+        return "T-001";
     }
 
     private String padLeftZeros(String inputString, int length) {

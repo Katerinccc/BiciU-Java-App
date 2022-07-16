@@ -8,7 +8,6 @@ import com.sofka.entities.UserType;
 import com.sofka.ticket.GenerateTicket;
 import com.sofka.util.DataUserType;
 import com.sofka.util.Utility;
-
 import java.util.ArrayList;
 import java.util.Optional;
 

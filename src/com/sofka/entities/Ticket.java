@@ -3,10 +3,12 @@ package com.sofka.entities;
 import com.sofka.util.Utility;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket {
 
     private Utility utility = new Utility();
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
     private String code;
     private Bicycle bicycle;
     private User user;
@@ -40,14 +42,14 @@ public class Ticket {
     }
 
     public void displayTicket(){
-        utility.displayData("A Ticket was generated:" +
+        utility.displayData("\nA Ticket was generated: \n" +
                 "\nCode: " + this.code +
                 "\nBicycle: " + this.bicycle.getCode() +
                 "\nUser: " + this.user.getId() +
                 "\nName: " + this.user.getFullName() +
                 "\nDate: " + this.date.toString() +
-                "\nStart time: " + this.startTime.toString() +
-                "\nEnd time: " + this.endTime.toString() +
+                "\nStart time: " + formatter.format(this.startTime) +
+                "\nEnd time: " + " - " +
                 "\nHave helmet: " + this.haveHelmet +
                 "\nGood Condition: " + this.inGoodCondition +
                 "\nStatus: " + this.ticketStatus.toString().toLowerCase() +
@@ -56,5 +58,41 @@ public class Ticket {
 
     public String getCode() {
         return code;
+    }
+
+    public Bicycle getBicycle() {
+        return bicycle;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public boolean getHaveHelmet() {
+        return haveHelmet;
+    }
+
+    public boolean isInGoodCondition() {
+        return inGoodCondition;
+    }
+
+    public TicketStatus getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

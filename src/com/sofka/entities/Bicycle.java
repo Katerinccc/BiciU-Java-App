@@ -36,8 +36,7 @@ public class Bicycle implements Borrow {
     }
 
     public void displayBicycle(){
-        utility.displayData("Bicycle chosen:" +
-                            "\nCode: " + this.code +
+        utility.displayData("\nCode: " + this.code +
                             "\nType: " + this.getBicycleType().toString() +
                             "\nColor: " + this.color);
     }
