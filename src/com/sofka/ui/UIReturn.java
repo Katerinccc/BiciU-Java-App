@@ -4,10 +4,9 @@ import com.sofka.entities.DebtType;
 import com.sofka.entities.Ticket;
 import com.sofka.entities.TicketStatus;
 import com.sofka.entities.User;
-import com.sofka.ticket.ReadFileTicket;
+import com.sofka.ticket.GenerateFileTicket;
 import com.sofka.util.DataUserType;
 import com.sofka.util.Utility;
-
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -20,13 +19,15 @@ public class UIReturn {
     private UITicket uiTicket = new UITicket();
     private ArrayList<User> users = new ArrayList<>();
 
-    public ArrayList<User> returnMenu(ArrayList<User> usersSystem){
+    public ArrayList<User> returnMenu (ArrayList<User> usersSystem){
 
         uiTicket.readCurrentTickets(currentTickets);
         users = usersSystem;
 
         if (!currentTickets.isEmpty()){
             returnBicycle();
+            GenerateFileTicket generateFileTicket = new GenerateFileTicket();
+            generateFileTicket.updateTicketsFile(currentTickets);
             return users;
         }else {
             utility.displayData("There are no tickets generated yet to return a bicycle.");
@@ -37,7 +38,7 @@ public class UIReturn {
 
     private void returnBicycle(){
 
-        double totalDebt = 0;
+        double totalDebt;
 
         Optional<Ticket> optionalTicket =  uiTicket.getTicket();
 
@@ -49,7 +50,7 @@ public class UIReturn {
             totalDebt = validateNoTime(currentTicket);
             totalDebt += validateHelmetStatus(currentTicket);
             totalDebt += validateDamagedStatus(currentTicket);
-            User currentUser = validateUser(currentTicket);
+            User currentUser = validateUser(currentTicket, users);
 
             if (totalDebt == 0){
                 currentTicket.setTicketStatus(TicketStatus.OK);
@@ -80,7 +81,7 @@ public class UIReturn {
 
         long difference =currentTicket.getStartTime().until(currentTicket.getEndTime(), ChronoUnit.MINUTES);
 
-        //First 30 minutes of borrow are free that´s why we subtract 1.
+        //First 30 minutes of borrow are free.
         return Math.ceil(difference / 30 -1) * debtValues(DebtType.NO_TIME);
     }
 
@@ -118,7 +119,7 @@ public class UIReturn {
         return damageValue;
     }
 
-    private User validateUser(Ticket currentTicket){
+    public User validateUser(Ticket currentTicket, ArrayList<User> users){
 
         Optional<User> currentUser = users.stream()
                 .filter(user -> user.getId().equals(currentTicket.getUser().getId())).findFirst();

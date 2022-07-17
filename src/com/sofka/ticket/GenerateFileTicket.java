@@ -3,6 +3,7 @@ package com.sofka.ticket;
 import com.sofka.entities.Ticket;
 import com.sofka.util.Utility;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -12,10 +13,14 @@ public class GenerateFileTicket {
     private Utility utility = new Utility();
     private ArrayList<Ticket> ticketsFile = new ArrayList<>();
 
-    public void updateTicketsFile(Ticket newTicket){
+    public void updateTicketsFileNewTicket(Ticket newTicket){
         ticketsFile = readCurrentTicketsFile();
         ticketsFile.add(newTicket);
-        writeTicketsFile(EXTERNAL_FILE);
+        writeTicketsFile(ticketsFile);
+    }
+
+    public void updateTicketsFile(ArrayList<Ticket> ticketsUpdate){
+        writeTicketsFile(ticketsUpdate);
     }
 
     private ArrayList<Ticket> readCurrentTicketsFile(){
@@ -23,14 +28,15 @@ public class GenerateFileTicket {
         return readFileTicket.readFileTickets();
     }
 
-    private void writeTicketsFile(String externalFile){
+    private void writeTicketsFile(ArrayList<Ticket> tickets){
         try
         {
-            FileWriter fileWriter = new FileWriter(externalFile);
+            File file = new File(EXTERNAL_FILE);
+            FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (int i = 0; i < ticketsFile.size(); i++) {
-                bufferedWriter.write(createNewLine(ticketsFile.get(i)));
+            for (int i = 0; i < tickets.size(); i++) {
+                bufferedWriter.write(createNewLine(tickets.get(i)));
                 bufferedWriter.newLine();
             }
 

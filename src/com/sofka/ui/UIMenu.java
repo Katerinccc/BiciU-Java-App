@@ -52,8 +52,14 @@ public class UIMenu {
                 UIBorrow uiBorrow = new UIBorrow();
                 bicycleSystem = uiBorrow.borrowMenu(bicycleSystem, usersSystem);
             }
-            case 3 -> utility.displayData("Option not available yet");
-            case 4 -> utility.displayData("Option not available yet");
+            case 3 -> {
+                UIReturn uiReturn = new UIReturn();
+                usersSystem.addAll(uiReturn.returnMenu(usersSystem));
+            }
+            case 4 -> {
+                UIPayTicket uiPayTicket = new UIPayTicket();
+                usersSystem.addAll(uiPayTicket.payMenu(usersSystem));
+            }
             case 5 -> {
                 UITicket uiTicket = new UITicket();
                 uiTicket.ticketMenu();
