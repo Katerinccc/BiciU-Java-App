@@ -54,7 +54,10 @@ public class UIMenu {
             }
             case 3 -> utility.displayData("Option not available yet");
             case 4 -> utility.displayData("Option not available yet");
-            case 5 -> utility.displayData("Option not available yet");
+            case 5 -> {
+                UITicket uiTicket = new UITicket();
+                uiTicket.ticketMenu();
+            }
             case 0 -> utility.displayData("You have exit the system BiciU successfully.");
             default -> utility.displayData("Enter a valid option.");
         }
