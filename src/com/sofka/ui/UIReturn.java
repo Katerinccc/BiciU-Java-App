@@ -7,6 +7,8 @@ import com.sofka.entities.User;
 import com.sofka.ticket.GenerateFileTicket;
 import com.sofka.util.DataUserType;
 import com.sofka.util.Utility;
+
+import javax.imageio.metadata.IIOMetadataFormat;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class UIReturn {
 
     public ArrayList<User> returnMenu (ArrayList<User> usersSystem){
 
-        uiTicket.readCurrentTickets(currentTickets);
+        currentTickets = uiTicket.readCurrentTickets();
         users = usersSystem;
 
         if (!currentTickets.isEmpty()){
@@ -81,6 +83,9 @@ public class UIReturn {
 
         long difference =currentTicket.getStartTime().until(currentTicket.getEndTime(), ChronoUnit.MINUTES);
 
+        if (difference < 30){
+            return 0;
+        }
         //First 30 minutes of borrow are free.
         return Math.ceil(difference / 30 -1) * debtValues(DebtType.NO_TIME);
     }

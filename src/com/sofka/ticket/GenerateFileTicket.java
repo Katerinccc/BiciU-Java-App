@@ -11,9 +11,8 @@ public class GenerateFileTicket {
 
     private final String EXTERNAL_FILE = "./resources/tickets.txt";
     private Utility utility = new Utility();
-    private ArrayList<Ticket> ticketsFile = new ArrayList<>();
 
-    public void updateTicketsFileNewTicket(Ticket newTicket){
+    public void updateTicketsFileNewTicket(Ticket newTicket, ArrayList<Ticket> ticketsFile){
         ticketsFile = readCurrentTicketsFile();
         ticketsFile.add(newTicket);
         writeTicketsFile(ticketsFile);

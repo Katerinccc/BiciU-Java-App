@@ -29,7 +29,7 @@ public class Ticket {
                   boolean haveHelmet,
                   boolean inGoodCondition,
                   TicketStatus ticketStatus,
-                  int amount)
+                  double amount)
     {
         this.code = code;
         this.bicycle = bicycle;

@@ -63,7 +63,7 @@ public class ReadFileTicket {
                 Boolean.parseBoolean(newTicket.get(7)),
                 Boolean.parseBoolean(newTicket.get(8)),
                 createTicketStatus(newTicket.get(9)),
-                Integer.parseInt(newTicket.get(10))));
+                Double.parseDouble(newTicket.get(10))));
     }
 
     private User createUser(String id, String name){

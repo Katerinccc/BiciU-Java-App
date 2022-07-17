@@ -29,7 +29,7 @@ public class GenerateTicket {
                             0);
 
         GenerateFileTicket generateFileTicket = new GenerateFileTicket();
-        generateFileTicket.updateTicketsFileNewTicket(newTicket);
+        generateFileTicket.updateTicketsFileNewTicket(newTicket, ticketsFile);
 
         return newTicket;
     }

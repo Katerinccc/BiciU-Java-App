@@ -15,9 +15,13 @@ public class UITicket {
     private Integer option = 0;
     private ArrayList<Ticket> currentTickets = new ArrayList<>();
 
-    public void ticketMenu(){
+    public UITicket() {
+        if(currentTickets.size() == 0) {
+            currentTickets = readCurrentTickets();
+        }
+    }
 
-        readCurrentTickets(currentTickets);
+    public void ticketMenu(){
 
         if (!currentTickets.isEmpty()){
             do {
@@ -48,9 +52,8 @@ public class UITicket {
         utility.displayData("-------------------------------------------------------------------------------");
     }
 
-    public void readCurrentTickets(ArrayList<Ticket> currentTickets){
-        ReadFileTicket readFileTicket = new ReadFileTicket();
-        currentTickets = readFileTicket.readFileTickets();
+    public ArrayList<Ticket> readCurrentTickets(){
+        return new ReadFileTicket().readFileTickets();
     }
 
     private void displayAllTickets(){

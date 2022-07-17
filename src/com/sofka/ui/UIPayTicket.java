@@ -19,7 +19,7 @@ public class UIPayTicket {
 
     public ArrayList<User> payMenu (ArrayList<User> usersSystem){
 
-        uiTicket.readCurrentTickets(currentTickets);
+        currentTickets = uiTicket.readCurrentTickets();
         users = usersSystem;
 
         if (!currentTickets.isEmpty()){
