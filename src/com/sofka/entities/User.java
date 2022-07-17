@@ -6,14 +6,14 @@ public class User {
     private String fullName;
     private int age;
     private UserType userType;
-    private Debt debt;
+    private double debtAmount;
 
     public User(String id, String fullName, int age, UserType userType) {
         this.id = id;
         this.fullName = fullName;
         this.age = age;
         this.userType = userType;
-        this.debt = new Debt(DebtType.NO_DEBT);
+        this.debtAmount = 0;
     }
 
     public User(String id, String fullName) {
@@ -29,11 +29,11 @@ public class User {
         return fullName;
     }
 
-    public Debt getDebt() {
-        return debt;
+    public double getDebtAmount() {
+        return debtAmount;
     }
 
-    public void setDebt(Debt debt) {
-        this.debt = debt;
+    public void setDebtAmount(double debtAmount) {
+        this.debtAmount = debtAmount;
     }
 }

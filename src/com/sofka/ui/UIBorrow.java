@@ -51,7 +51,7 @@ public class UIBorrow {
     }
 
     private boolean validateUserHasDebt(User user){
-        return user.getDebt().getAmount() != 0;
+        return user.getDebtAmount() != 0;
     }
 
     private BicycleType selectBicycleType(){

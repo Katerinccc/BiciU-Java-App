@@ -13,11 +13,11 @@ public class UITicket {
 
     private Utility utility = new Utility();
     private Integer option = 0;
-    ArrayList<Ticket> currentTickets = new ArrayList<>();
+    private ArrayList<Ticket> currentTickets = new ArrayList<>();
 
     public void ticketMenu(){
 
-        readCurrentTickets();
+        readCurrentTickets(currentTickets);
 
         if (!currentTickets.isEmpty()){
             do {
@@ -48,7 +48,7 @@ public class UITicket {
         utility.displayData("-------------------------------------------------------------------------------");
     }
 
-    private void readCurrentTickets(){
+    public void readCurrentTickets(ArrayList<Ticket> currentTickets){
         ReadFileTicket readFileTicket = new ReadFileTicket();
         currentTickets = readFileTicket.readFileTickets();
     }
@@ -58,12 +58,7 @@ public class UITicket {
     }
 
     private void displayTicketCode(){
-        String ticketCode;
-        utility.displayData("Enter ticket code to search (Format T-NNN)");
-        ticketCode = (String) utility.getDataUser(DataUserType.TEXT);
-
-        Optional<Ticket> optionalTicket = currentTickets.stream().filter(ticket -> ticket.getCode()
-                .equals(ticketCode)).findFirst();
+        Optional<Ticket> optionalTicket = getTicket();
 
         if (optionalTicket.isEmpty()){
             utility.displayData("The code enter do not exists. Please validate and try again.");
@@ -73,6 +68,15 @@ public class UITicket {
             displayFormat(ticketSearch);
         }
 
+    }
+
+    public Optional<Ticket> getTicket() {
+        String ticketCode;
+        utility.displayData("Enter ticket code to search (Format T-NNN)");
+        ticketCode = (String) utility.getDataUser(DataUserType.TEXT);
+
+        return currentTickets.stream().filter(ticket -> ticket.getCode()
+                .equals(ticketCode)).findFirst();
     }
 
     private int choiceTicketStatus(){

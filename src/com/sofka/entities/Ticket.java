@@ -18,7 +18,7 @@ public class Ticket {
     private boolean haveHelmet;
     private boolean inGoodCondition;
     private TicketStatus ticketStatus;
-    private int amount;
+    private double amount;
 
     public Ticket(String code,
                   Bicycle bicycle,
@@ -51,7 +51,7 @@ public class Ticket {
                 "\nName: " + this.user.getFullName() +
                 "\nDate: " + this.date.toString() +
                 "\nStart time: " + formatter.format(this.startTime) +
-                "\nEnd time: " + " - " +
+                "\nEnd time: " + validateEndTime() +
                 "\nHave helmet: " + this.haveHelmet +
                 "\nGood Condition: " + this.inGoodCondition +
                 "\nStatus: " + this.ticketStatus.toString().toLowerCase() +
@@ -94,7 +94,34 @@ public class Ticket {
         return ticketStatus;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setHaveHelmet(boolean haveHelmet) {
+        this.haveHelmet = haveHelmet;
+    }
+
+    public void setInGoodCondition(boolean inGoodCondition) {
+        this.inGoodCondition = inGoodCondition;
+    }
+
+    public void setTicketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    private String validateEndTime(){
+        if (this.endTime == null){
+            return " - ";
+        }
+        return formatter.format(this.endTime);
     }
 }
